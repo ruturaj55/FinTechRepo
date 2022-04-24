@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Sun Apr 24 10:39:10 IST 2022
+https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/.error=Could not transfer artifact io.netty\:netty-bom\:pom\:4.1.72.Final from/to gdf-public (https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public)\: Transfer failed for https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/io/netty/netty-bom/4.1.72.Final/netty-bom-4.1.72.Final.pom
+77d4764fd5240420bf3fa78379b37b11a966730f@default-gdf-public-https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/.lastUpdated=1650776949385
+http\://nexus-dcc.th.allianz/repository/maven-public/.lastUpdated=1650776950329

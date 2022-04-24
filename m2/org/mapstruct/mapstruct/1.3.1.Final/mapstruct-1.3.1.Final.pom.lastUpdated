@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Fri Apr 22 11:43:17 IST 2022
+https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/.error=Could not transfer artifact org.mapstruct\:mapstruct\:pom\:1.3.1.Final from/to gdf-public (https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public)\: Transfer failed for https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/org/mapstruct/mapstruct/1.3.1.Final/mapstruct-1.3.1.Final.pom
+77d4764fd5240420bf3fa78379b37b11a966730f@default-gdf-public-https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/.lastUpdated=1650607996924
+http\://nexus-dcc.th.allianz/repository/maven-public/.lastUpdated=1650607997575

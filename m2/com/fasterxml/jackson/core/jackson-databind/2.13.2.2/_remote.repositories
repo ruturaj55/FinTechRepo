@@ -1,0 +1,6 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Apr 20 11:05:45 IST 2022
+jackson-databind-2.13.2.2.pom>nexus-amosth=
+jackson-databind-2.13.2.2.jar>nexus-amosth=
+jackson-databind-2.13.2.2.jar>gdf-public=
+jackson-databind-2.13.2.2.pom>gdf-public=

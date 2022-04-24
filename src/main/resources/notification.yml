@@ -1,0 +1,39 @@
+openapi: 3.0.0
+info:
+  title: Fin Tech API - Notification Management
+  description: This API provides the Notification Management operations.
+  version: 0.0.1
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: Provide auth token , recieved from cisl OAuth service to access all api's.
+      scheme: bearer
+      bearerFormat: "bearer"  # optional, for documentation purposes only
+security:
+  - bearerAuth: [ ]
+
+paths:
+  /fintech/notification/send-notification:
+    get:
+      summary: Get Account balance information
+      operationId: getAccountBalance
+      parameters:
+        - name: accNumber
+          in: query
+          description: Account number
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get Account Balance
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'fintech-models.yml#/components/schemas/NotificationDetailsDTO'
+      tags:
+        - Notification Management

@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Apr 20 15:24:12 IST 2022
+wagon-provider-api-2.12.jar>nexus-amosth=
+wagon-provider-api-2.12.pom>nexus-amosth=

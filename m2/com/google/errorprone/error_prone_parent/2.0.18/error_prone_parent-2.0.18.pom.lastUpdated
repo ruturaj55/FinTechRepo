@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Apr 20 14:19:42 IST 2022
+https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/.error=Could not transfer artifact com.google.errorprone\:error_prone_parent\:pom\:2.0.18 from/to gdf-public (https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public)\: Transfer failed for https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/com/google/errorprone/error_prone_parent/2.0.18/error_prone_parent-2.0.18.pom
+77d4764fd5240420bf3fa78379b37b11a966730f@default-gdf-public-https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/.lastUpdated=1650444582135
+http\://nexus-dcc.th.allianz/repository/maven-public/.lastUpdated=1650444582492

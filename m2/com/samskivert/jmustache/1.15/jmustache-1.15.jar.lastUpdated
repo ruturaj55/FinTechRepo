@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Apr 20 14:21:07 IST 2022
+https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/.error=Could not transfer artifact com.samskivert\:jmustache\:jar\:1.15 from/to gdf-public (https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public)\: Transfer failed for https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/com/samskivert/jmustache/1.15/jmustache-1.15.jar
+77d4764fd5240420bf3fa78379b37b11a966730f@default-gdf-public-https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/.lastUpdated=1650444623256
+http\://nexus-dcc.th.allianz/repository/maven-public/.lastUpdated=1650444667473

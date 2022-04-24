@@ -1,0 +1,5 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Sun Apr 24 10:38:59 IST 2022
+https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/.error=Could not transfer artifact org.infinispan\:infinispan-build-configuration-parent\:pom\:12.1.10.Final from/to gdf-public (https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public)\: Transfer failed for https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/org/infinispan/infinispan-build-configuration-parent/12.1.10.Final/infinispan-build-configuration-parent-12.1.10.Final.pom
+77d4764fd5240420bf3fa78379b37b11a966730f@default-gdf-public-https\://nexus-adp-tools-service-owners.apps.crp.ec1.aws.aztec.cloud.allianz/repository/maven-public/.lastUpdated=1650776938340
+http\://nexus-dcc.th.allianz/repository/maven-public/.lastUpdated=1650776939844

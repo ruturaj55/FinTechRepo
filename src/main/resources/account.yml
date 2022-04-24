@@ -1,0 +1,75 @@
+openapi: 3.0.0
+info:
+  title: Fin Tech API - Account Management
+  description: This API provides operations on Account details.
+  version: 0.0.1
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: Provide auth token , recieved from cisl OAuth service to access all api's.
+      scheme: bearer
+      bearerFormat: "bearer"  # optional, for documentation purposes only
+security:
+  - bearerAuth: [ ]
+
+paths:
+  /fintech/accounts/account-holder:
+    get:
+      summary: Get Account Holder
+      operationId: getAccountHolder
+      parameters:
+        - name: accNumber
+          in: query
+          description: Account number
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Get Account Holder
+          content:
+            application/json:
+              schema:
+                $ref: 'fintech-models.yml#/components/schemas/AccountDetailsDTO'
+      tags:
+        - Account Management
+  /fintech/accounts/create-account:
+    post:
+      summary: create new account
+      operationId: createNewAccount
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'fintech-models.yml#/components/schemas/AccountDetailsDTO'
+      responses:
+        '200':
+          description: Created account details
+          content:
+            application/json:
+              schema:
+                $ref: 'fintech-models.yml#/components/schemas/AccountDetailsDTO'
+      tags:
+        - Account Management
+  /fintech/accounts/update-account:
+    put:
+      summary: update account details
+      operationId: updateAccountDetails
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'fintech-models.yml#/components/schemas/AccountDetailsDTO'
+      responses:
+        '200':
+          description: Created account details
+          content:
+            application/json:
+              schema:
+                $ref: 'fintech-models.yml#/components/schemas/AccountDetailsDTO'
+      tags:
+        - Account Management
