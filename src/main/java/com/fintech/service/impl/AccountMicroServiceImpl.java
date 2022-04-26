@@ -29,7 +29,7 @@ public class AccountMicroServiceImpl implements AccountMicroService {
             AccountDetails accountDetails = accountDetailsMapper.toAccountDetailsRequestBody(accountDetailsDTO);
             AccountDetails savedAccountDetails = accountDetailsRepository.save(accountDetails);
             log.info("Successfully Created Account no: " + savedAccountDetails.getAccountId());
-           // notificationMicroService.sendNewAccountNotification(accountDetails);
+            // notificationMicroService.sendNewAccountNotification(accountDetails);
             return accountDetailsMapper.toAccountDetailsDTORequestBody(savedAccountDetails);
         } catch (ResponseStatusException e) {
             log.error("New Account creation failed , Please check error logs...");
@@ -55,15 +55,31 @@ public class AccountMicroServiceImpl implements AccountMicroService {
     public AccountDetailsDTO updateAccountDetails(AccountDetailsDTO accountDetailsDTO) {
         log.info("beginning of Update existing Account function");
         try {
-            AccountDetails currentAccountDetails = accountDetailsRepository.getById(Long.valueOf(accountDetailsDTO.getAccountId()));
-            AccountDetails accountDetails = accountDetailsMapper.toAccountDetailsRequestBody(accountDetailsDTO);
-            AccountDetails savedAccountDetails = accountDetailsRepository.save(accountDetails);
-            log.info("Successfully Created Account no: " + savedAccountDetails.getAccountId());
+            AccountDetails currentAccountDetails = accountDetailsRepository.findById(Long.valueOf(accountDetailsDTO.getAccountId())).get();
+            AccountDetails savedAccountDetails = accountDetailsRepository.save(prepareUpdateObj(currentAccountDetails, accountDetailsDTO));
+            log.info("Successfully Updated Account Details for ID: " + savedAccountDetails.getAccountId());
             return accountDetailsMapper.toAccountDetailsDTORequestBody(savedAccountDetails);
         } catch (ResponseStatusException e) {
-            log.error("Account Updation failed , Please check error logs...");
+            log.error("Account Update Operation failed , Please check error logs...");
             e.printStackTrace();
             throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Exception happened : " + e.getMessage());
         }
+    }
+
+    /**
+     *
+     * @param currentAccountDetails
+     * @param requestDTO
+     * @return
+     */
+    private AccountDetails prepareUpdateObj(AccountDetails currentAccountDetails, AccountDetailsDTO requestDTO) {
+        AccountDetails requestAccountDetails = accountDetailsMapper.toAccountDetailsRequestBody(requestDTO);
+        currentAccountDetails.setAccountId(requestAccountDetails.getAccountId());
+        currentAccountDetails.setAccountType(requestAccountDetails.getAccountType().isEmpty() ? currentAccountDetails.getAccountType() : requestAccountDetails.getAccountType());
+        currentAccountDetails.setFirstName(requestAccountDetails.getFirstName().isEmpty() ? currentAccountDetails.getFirstName() : requestAccountDetails.getFirstName());
+        currentAccountDetails.setLastName(requestAccountDetails.getLastName().isEmpty() ? currentAccountDetails.getLastName() : requestAccountDetails.getLastName());
+        currentAccountDetails.setEmailId(requestAccountDetails.getEmailId().isEmpty() ? currentAccountDetails.getEmailId() : requestAccountDetails.getEmailId());
+        currentAccountDetails.setPassword(requestAccountDetails.getPassword().isEmpty() ? currentAccountDetails.getPassword() : requestAccountDetails.getPassword());
+        return currentAccountDetails;
     }
 }

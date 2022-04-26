@@ -14,7 +14,7 @@ public abstract class AccountDetailsMapper {
     @Mapping(target = "accountType", source = "accountType")
     @Mapping(target = "firstName", source = "firstName")
     @Mapping(target = "lastName", source = "lastName")
-    @Mapping(target = "accountBalance", source = "accountBalance")
+    @Mapping(target = "accountBalance", source = "initialAccountBalance")
     @Mapping(target = "emailId", source = "emailId")
     @Mapping(target = "password", source = "password")
     @Mapping(target = "dateOfBirth", source = "dateOfBirth")
@@ -28,6 +28,7 @@ public abstract class AccountDetailsMapper {
     @Mapping(target = "lastName", source = "lastName")
     @Mapping(target = "emailId", source = "emailId")
     @Mapping(target = "password", source = "password")
+    @Mapping(target = "initialAccountBalance", source = "accountBalance")
     @Mapping(target = "dateOfBirth", source = "dateOfBirth")
     @Mapping(target = "remark", source = "remark")
     public abstract AccountDetailsDTO toAccountDetailsDTORequestBody(AccountDetails accountDetails);
@@ -38,14 +39,6 @@ public abstract class AccountDetailsMapper {
             accountId = String.valueOf(accountDetails.getAccountId());
         }
         return accountId;
-    }
-
-    double mapAccountBalance(AccountDetailsDTO accountDetailsDTO) {
-        double balance = 0.0;
-        if (ValidateUtils.isNotNullOrEmpty(accountDetailsDTO.getAccountBalance())) {
-            balance = Double.valueOf(accountDetailsDTO.getAccountBalance());
-        }
-        return balance;
     }
 
 }

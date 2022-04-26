@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
@@ -17,9 +17,9 @@ public class TranjactionDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long tranjactionId;
     private String tranjactionType;
-    private String tranjactionAmount;
-    private String availableBalance;
-    private LocalDateTime tranjactionDateTime;
+    private double tranjactionAmount;
+    private double availableBalance;
+    private Date tranjactionDate;
     private String tranjactionRemark;
     private Long accountId;
 }

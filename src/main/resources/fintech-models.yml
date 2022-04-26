@@ -31,7 +31,7 @@ components:
           type: string
         accountId:
           type: string
-        accountBalance:
+        initialAccountBalance:
           type: double
         firstName:
           type: string
@@ -49,18 +49,18 @@ components:
     TranjactionDetailsDTO:
       properties:
         tranjactionId:
-          type: string
+          type: long
         tranjactionType:
           type: string
         tranjactionAmount:
+          type: double
+        tranjactionDate:
           type: string
-        tranjactionDateTime:
-          type: string
-          format: date-time
+          format: date
         tranjactionRemark:
           type: string
         accountId:
-          type: string
+          type: long
     NotificationDetailsDTO:
       properties:
         firstName:
@@ -72,4 +72,14 @@ components:
         availableBalance:
           type: string
         notificationMessage:
+          type: string
+    JwtRequestDTO:
+      properties:
+        userName:
+          type: string
+        password:
+          type: string
+    JwtResponseDTO:
+      properties:
+        token:
           type: string

@@ -30,7 +30,6 @@ public class TranjactionMicroServiceImpl implements TranjactionMicroService {
     public TranjactionDetailsDTO newTranjaction(TranjactionDetailsDTO tranjactionDetailsDTO) {
         TranjactionDetailsDTO tranjactionDetailsDTOResponse = new TranjactionDetailsDTO();
         log.info("beginning of new tranjaction function");
-        TranjactionDetails savednewTranjactionDetails = null;
         try {
             if (tranjactionDetailsDTO.getTranjactionType().equals("withdrawal")) {
                 tranjactionDetailsDTOResponse = withdrawal(tranjactionDetailsDTO);
@@ -40,7 +39,7 @@ public class TranjactionMicroServiceImpl implements TranjactionMicroService {
                 log.error("Other Tranjaction Type is Not Allowed");
                 throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Tranjaction Type is not allowed : " + tranjactionDetailsDTO.getTranjactionType());
             }
-            return tranjactionDetailsMapper.toTranjactionDetailsDTO(savednewTranjactionDetails);
+            return tranjactionDetailsDTOResponse;
         } catch (ResponseStatusException e) {
             log.error("Tranjaction failed , Please check error logs...");
             e.printStackTrace();
@@ -48,41 +47,55 @@ public class TranjactionMicroServiceImpl implements TranjactionMicroService {
         }
     }
 
+    /**
+     * Function to perform Deposite type of tranjaction
+     *
+     * @param tranjactionDetailsDTORequest
+     * @return
+     */
     private TranjactionDetailsDTO deposite(TranjactionDetailsDTO tranjactionDetailsDTORequest) {
-        TranjactionDetailsDTO tranjactionDetailsDTO1 = new TranjactionDetailsDTO();
+        TranjactionDetailsDTO tranjactionDetailsDTO = new TranjactionDetailsDTO();
         Double withdraAmount = Double.valueOf(tranjactionDetailsDTORequest.getTranjactionAmount());
         AccountDetails accountDetails = accountDetailsRepository.getById(Long.valueOf(tranjactionDetailsDTORequest.getAccountId()));
         double currentBalance = accountDetails.getAccountBalance();
-        if (currentBalance >= withdraAmount) {
+        if (tranjactionDetailsDTORequest.getTranjactionAmount() != 0) {
             currentBalance += withdraAmount;
             accountDetails.setAccountBalance(currentBalance);
             accountDetailsRepository.save(accountDetails);
             TranjactionDetails newTranjactionDetails = tranjactionDetailsMapper.toTranjactionDetailsRequestBody(tranjactionDetailsDTORequest);
+            newTranjactionDetails.setAvailableBalance(currentBalance);
             TranjactionDetails savednewTranjactionDetails = tranjactionDetailsRepository.save(newTranjactionDetails);
-            tranjactionDetailsDTO1 = tranjactionDetailsMapper.toTranjactionDetailsDTO(savednewTranjactionDetails);
+            tranjactionDetailsDTO = tranjactionDetailsMapper.toTranjactionDetailsDTO(savednewTranjactionDetails);
             log.info("Successfully Deposited Amount with new Tranjaction no: " + savednewTranjactionDetails.getTranjactionId());
-            notificationMicroService.sendTranjactionNotification(accountDetails, savednewTranjactionDetails);
+            // notificationMicroService.sendTranjactionNotification(accountDetails, savednewTranjactionDetails);
         }
 
-        return tranjactionDetailsDTO1;
+        return tranjactionDetailsDTO;
     }
 
+    /**
+     * Function to perform withdrawal type of tranjaction
+     *
+     * @param tranjactionDetailsDTORequest
+     * @return
+     */
     private TranjactionDetailsDTO withdrawal(TranjactionDetailsDTO tranjactionDetailsDTORequest) {
-        TranjactionDetailsDTO tranjactionDetailsDTO1 = new TranjactionDetailsDTO();
+        TranjactionDetailsDTO tranjactionDetailsDTO = new TranjactionDetailsDTO();
         Double withdraAmount = Double.valueOf(tranjactionDetailsDTORequest.getTranjactionAmount());
-        AccountDetails accountDetails = accountDetailsRepository.getById(Long.valueOf(tranjactionDetailsDTORequest.getAccountId()));
+        AccountDetails accountDetails = accountDetailsRepository.getById(tranjactionDetailsDTORequest.getAccountId());
         double currentBalance = accountDetails.getAccountBalance();
         if (currentBalance >= withdraAmount) {
             currentBalance -= withdraAmount;
             accountDetails.setAccountBalance(currentBalance);
             accountDetailsRepository.save(accountDetails);
             TranjactionDetails newTranjactionDetails = tranjactionDetailsMapper.toTranjactionDetailsRequestBody(tranjactionDetailsDTORequest);
+            newTranjactionDetails.setAvailableBalance(currentBalance);
             TranjactionDetails savednewTranjactionDetails = tranjactionDetailsRepository.save(newTranjactionDetails);
-            tranjactionDetailsDTO1 = tranjactionDetailsMapper.toTranjactionDetailsDTO(savednewTranjactionDetails);
+            tranjactionDetailsDTO = tranjactionDetailsMapper.toTranjactionDetailsDTO(savednewTranjactionDetails);
             log.info("Successfully Withdrawal of amount with Tranjaction no: " + savednewTranjactionDetails.getTranjactionId());
-            notificationMicroService.sendTranjactionNotification(accountDetails, savednewTranjactionDetails);
+            // notificationMicroService.sendTranjactionNotification(accountDetails, savednewTranjactionDetails);
         }
 
-        return tranjactionDetailsDTO1;
+        return tranjactionDetailsDTO;
     }
 }

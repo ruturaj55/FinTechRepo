@@ -15,7 +15,7 @@ security:
   - bearerAuth: [ ]
 
 paths:
-  /fintech/tranjaction/update-account-balance:
+  /fintech/tranjaction/new-tranjaction:
     post:
       summary: update account balance based on tranjaction
       operationId: updateAccountBalance

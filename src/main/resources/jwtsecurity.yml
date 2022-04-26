@@ -1,0 +1,36 @@
+openapi: 3.0.0
+info:
+  title: Fin Tech API - JWT Security
+  description: This API provides operations on JWT Security.
+  version: 0.0.1
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      description: Provide auth token , recieved from cisl OAuth service to access all api's.
+      scheme: bearer
+      bearerFormat: "bearer"  # optional, for documentation purposes only
+security:
+  - bearerAuth: [ ]
+
+paths:
+  /fintech/generate-token:
+    post:
+      summary: generate jwt token for authenticated user
+      operationId: generateToken
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: 'fintech-models.yml#/components/schemas/JwtRequestDTO'
+      responses:
+        '200':
+          description: JWT token creation
+          content:
+            application/json:
+              schema:
+                $ref: 'fintech-models.yml#/components/schemas/JwtResponseDTO'
+      tags:
+        - JWT Security Management

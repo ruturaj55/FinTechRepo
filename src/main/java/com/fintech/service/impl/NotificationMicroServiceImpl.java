@@ -14,15 +14,13 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.mail.internet.InternetAddress;
-
 @Slf4j
 @Service
 @RequiredArgsConstructor
 public class NotificationMicroServiceImpl implements NotificationMicroService {
     @Autowired
     private JavaMailSender emailSender;
-    @Value("${email.frommailid}")
+    @Value("email.frommailid")
     private String fromMailId;
     @Value("${email.account.created.subject}")
     private String accCreatedSubject;
@@ -34,7 +32,7 @@ public class NotificationMicroServiceImpl implements NotificationMicroService {
         try {
             SimpleMailMessage simpleMailMessage = prepareTranjactionMessage(accountDetails, tranjactionDetails);
             emailSender.send(simpleMailMessage);
-            return new NotificationDetailsDTO();//.ac(accountDetails.getFirstName()).notificationMessage(simpleMailMessage.getText()).availableBalance(String.valueOf(accountDetails.getAccountBalance()));
+            return new NotificationDetailsDTO().firstName(accountDetails.getFirstName()).notificationMessage(simpleMailMessage.getText()).availableBalance(String.valueOf(accountDetails.getAccountBalance()));
         } catch (Exception e) {
             log.error("Notification cant send, Please check error logs...");
             e.printStackTrace();
@@ -48,7 +46,7 @@ public class NotificationMicroServiceImpl implements NotificationMicroService {
         try {
             SimpleMailMessage simpleMailMessage = prepareAccCreatedMessage(accountDetails);
             emailSender.send(simpleMailMessage);
-            return new NotificationDetailsDTO();//.accountHolderName(accountDetails.getFirstName()).notificationMessage(simpleMailMessage.getText()).availableBalance(String.valueOf(accountDetails.getAccountBalance()));
+            return new NotificationDetailsDTO().firstName(accountDetails.getFirstName()).notificationMessage(simpleMailMessage.getText()).availableBalance(String.valueOf(accountDetails.getAccountBalance()));
         } catch (Exception e) {
             log.error("Notification cant send, Please check error logs...");
             e.printStackTrace();
@@ -56,6 +54,13 @@ public class NotificationMicroServiceImpl implements NotificationMicroService {
         }
     }
 
+    /**
+     * prepareTranjactionMessage for email notification body
+     *
+     * @param accountDetails
+     * @param tranjactionDetails
+     * @return
+     */
     private SimpleMailMessage prepareTranjactionMessage(AccountDetails accountDetails, TranjactionDetails tranjactionDetails) {
         String subject = (tranjactionDetails.getTranjactionType().isEmpty()) ? "Account Notification" : " Tranjaction Notification";
         String messageBody = (tranjactionDetails.getTranjactionType().isEmpty()) ? "Account created with :" + accountDetails.getAccountId() : tranjactionDetails.getTranjactionType() + " Tranjaction Completed with Id :" + tranjactionDetails.getTranjactionId();
@@ -67,6 +72,12 @@ public class NotificationMicroServiceImpl implements NotificationMicroService {
         return notificationMessage;
     }
 
+    /**
+     * prepareAccCreatedMessage notification body
+     *
+     * @param accountDetails
+     * @return
+     */
     private SimpleMailMessage prepareAccCreatedMessage(AccountDetails accountDetails) {
         String subject = "Account Creation Notification";
         String messageBody = "Account created with Account Id :" + accountDetails.getAccountId();
