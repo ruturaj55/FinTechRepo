@@ -29,7 +29,7 @@ public class AccountMicroServiceImpl implements AccountMicroService {
             AccountDetails accountDetails = accountDetailsMapper.toAccountDetailsRequestBody(accountDetailsDTO);
             AccountDetails savedAccountDetails = accountDetailsRepository.save(accountDetails);
             log.info("Successfully Created Account no: " + savedAccountDetails.getAccountId());
-            // notificationMicroService.sendNewAccountNotification(accountDetails);
+            notificationMicroService.sendNewAccountNotification(accountDetails);
             return accountDetailsMapper.toAccountDetailsDTORequestBody(savedAccountDetails);
         } catch (ResponseStatusException e) {
             log.error("New Account creation failed , Please check error logs...");
