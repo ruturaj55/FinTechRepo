@@ -67,7 +67,7 @@ public class TranjactionMicroServiceImpl implements TranjactionMicroService {
             TranjactionDetails savednewTranjactionDetails = tranjactionDetailsRepository.save(newTranjactionDetails);
             tranjactionDetailsDTO = tranjactionDetailsMapper.toTranjactionDetailsDTO(savednewTranjactionDetails);
             log.info("Successfully Deposited Amount with new Tranjaction no: " + savednewTranjactionDetails.getTranjactionId());
-            // notificationMicroService.sendTranjactionNotification(accountDetails, savednewTranjactionDetails);
+            notificationMicroService.sendTranjactionNotification(accountDetails, savednewTranjactionDetails);
         }
 
         return tranjactionDetailsDTO;
@@ -93,7 +93,7 @@ public class TranjactionMicroServiceImpl implements TranjactionMicroService {
             TranjactionDetails savednewTranjactionDetails = tranjactionDetailsRepository.save(newTranjactionDetails);
             tranjactionDetailsDTO = tranjactionDetailsMapper.toTranjactionDetailsDTO(savednewTranjactionDetails);
             log.info("Successfully Withdrawal of amount with Tranjaction no: " + savednewTranjactionDetails.getTranjactionId());
-            // notificationMicroService.sendTranjactionNotification(accountDetails, savednewTranjactionDetails);
+            notificationMicroService.sendTranjactionNotification(accountDetails, savednewTranjactionDetails);
         }
 
         return tranjactionDetailsDTO;
